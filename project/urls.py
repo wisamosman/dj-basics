@@ -19,15 +19,15 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from posts.views import post_list , post_detail , new_post , edit_post , delete_post
+from posts.views import PostList , PostDetail ,PostCreate , PostEdit , PostDelete
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('blog/' , post_list),
-    path('blog/new', new_post),
-    path('blog/<int:post_id>' , post_detail),
-    path('blog/<int:post_id>/edit' , edit_post),
-    path('blog/<int:post_id>/delete' , delete_post),
+    path('blog/' , PostList.as_view()),
+    path('blog/new', PostCreate.as_view()),
+    path('blog/<int:pk>' , PostDetail.as_view()),
+    path('blog/<int:pk>/edit' , PostEdit.as_view()),
+    path('blog/<int:pk>/delete' , PostDelete.as_view()),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
