@@ -2,12 +2,14 @@ from django.shortcuts import render , redirect
 from .models import Post
 from .forms import PostForm
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
 
-class PostList(generic.ListView):
-        model = Post
+class PostList(LoginRequiredMixin,generic.ListView):
+    model = Post
+    login_url = '/admin/login'
 
 
 class PostDetail(generic.DetailView):
